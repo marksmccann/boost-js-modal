@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="A demo of Boost JS Modal">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Boost JS Modal Demo</title>
+        <link rel="stylesheet" href="../src/modal.css">
+        <link rel="stylesheet" href="demo.css">
+    </head>
+    <body>
+        <div id="modal" data-init="modal" class="modal">
+            <h4 data-bind="#modal" data-role="heading">Modal Heading</h4>
+            <button data-bind="#modal" data-role="close">Close</button>
+        </div>
+        <button data-bind="#modal" data-role="open">Open</button>
+        <button data-bind="#modal" data-role="open">Open</button>
+        <button data-bind="#modal" data-role="open">Open</button>
+        <button data-bind="#modal" data-role="open">Open</button>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+        <script src="https://cdn.rawgit.com/marksmccann/boost-js/v0.3.2/dist/boost.min.js"></script>
+        <script src="../src/modal.js"></script>
+        <script>
+            var boost = $.fn.boost;
+            var modal = $.fn.boost.modal;
+            $.fn.modal = boost( modal.plugin, modal.defaults );
+            boost.auto();
+        </script>
+    </body>
+</html>
