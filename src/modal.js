@@ -17,13 +17,13 @@
         // wrap the source element with the inner container
         inst.source.wrap( $(document.createElement('div'))
             .addClass( inst.settings.innerClass )
-            .attr('role','document') 
+            .attr('role','document')[0]
         );
         // wrap the inner container with the outer container
         inst.source.parent().wrap( $(document.createElement('div')) 
             .addClass( inst.settings.outerClass )
             .attr('role','dialog') 
-            .attr('aria-hidden','true')
+            .attr('aria-hidden','true')[0]
         );
         // save the outermost container to instance
         inst.container = inst.source.parent().parent();
