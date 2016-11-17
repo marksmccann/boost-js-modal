@@ -67,7 +67,7 @@ openOnLoad | `false` | open the modal at instantiation (page load)
 onOpen | `null` | a callback function called when the modal is opened
 onClose | `null` | a callback function called when modal is closed
 onInit | `null` | a callback function called when modal is initialized
-*\*Note: if you change any of the class names, you will have to update the same classes in the css as well.*
+**Note: if you change any of the class names, you will have to update the same classes in the css as well.*
 ### Usage
 ```javascript
 $('#modal').modal({
