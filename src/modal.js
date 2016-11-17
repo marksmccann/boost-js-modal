@@ -12,14 +12,161 @@
     var Modal = function() {
         // local instance
         var inst = this;
+        // the last trigger used to open the modal
+        inst.lastOpenedBy;
+        // wrap the source element with the inner container
+        inst.source.wrap( $(document.createElement('div'))
+            .addClass( inst.settings.innerClass )
+            .attr('role','document') 
+        );
+        // wrap the inner container with the outer container
+        inst.source.parent().wrap( $(document.createElement('div')) 
+            .addClass( inst.settings.outerClass )
+            .attr('role','dialog') 
+            .attr('aria-hidden','true')
+        );
+        // save the outermost container to instance
+        inst.container = inst.source.parent().parent();
+        // add aria-labelledby="[headingID]" to each panel
+        // if heading does not have an id, create a new one and add it
+        if( inst.roles.hasOwnProperty('heading') ) {
+            var id = inst.roles.heading.attr('id');
+            id = id ? id : inst.id+'-heading';
+            inst.container.attr('aria-labelledby',id);
+            inst.roles.heading.first().attr('id', id);
+        }
+        // if effect setting is set, add the class to inner container
+        if( typeof inst.settings.effect === 'string' ) {
+            inst.container.children().first().addClass( inst.settings.effect );
+        }
+        // if modal hidden from style attribute, make visible
+        if( inst.source[0].style.getPropertyValue('display') == 'none' ) {
+            inst.source[0].style.removeProperty('display');
+        }
+        // triggers that open the modal
+        if( inst.roles.hasOwnProperty('toggle') ) {
+            inst.roles.toggle.on('click', function(e){
+                e.preventDefault();
+                if( !inst.isOpen() ) {
+                    inst.lastOpenedBy = this;
+                }
+                inst.toggle();
+            });
+        }
+        // triggers that open the modal
+        if( inst.roles.hasOwnProperty('open') ) {
+            inst.roles.open.on('click', function(e){
+                e.preventDefault();
+                inst.lastOpenedBy = this;
+                inst.open();
+            });
+        }
+        // triggers that close the modal
+        if( inst.roles.hasOwnProperty('close') ) {
+            inst.roles.close.on('click', function(e){
+                e.preventDefault();
+                inst.close();
+            });
+        }
+        // close modal if users clicks anywhere off of it
+        if( inst.settings.closeOnClickOff ) {
+            inst.container.on( 'click', function(e){
+                if( e.target == this ) inst.close();
+            });
+        }
+        // close modal with 'esc' key
+        if( inst.settings.closeOnEsc ) {
+            $('body').on( 'keyup', function(e){
+                if(!e.keyCode || e.keyCode === 27) inst.close();
+            });
+        }
+        // keep user locked in modal until closed
+        $('body').on( 'keyup', function(e){
+            if( inst.isOpen() && !inst.container[0].contains(document.activeElement) ) {
+                e.stopPropagation(); inst.source[0].focus();
+            }
+        });
+        // move element to top of document for accessibility
+        document.body.insertBefore( inst.container[0], document.body.firstChild );
+        // open modal if set to true
+        if( inst.settings.openOnLoad ) inst.open();
+        // run the onInit callback
+        if( $.isFunction(inst.settings.onInit) ) inst.settings.onInit.call(inst);
     }
 
     Modal.prototype = {
+        /**
+         * opens the modal
+         * @param  {function} callback 
+         * @return {instance}
+         */
+        open: function ( callback ) {
+            var inst = this;
+            // prevent body from scrolling on mobile devices
+            $('body').css('overflow','hidden');
+            // show the modal
+            inst.container.addClass( inst.settings.activeClass );
+            inst.container.attr( 'aria-hidden', 'false' );
+            // for accessibility, add tab-index and set focus on modal
+            inst.source.attr( 'tabindex', '0' );
+            setTimeout( function(){ inst.source[0].focus(); }, 25 );
+            // run the callbacks
+            if( $.isFunction(callback) ) callback.call(inst);
+            if( $.isFunction(inst.settings.onOpen) ) inst.settings.onOpen.call(inst);
+            // return instance
+            return inst;
+        },
+        /**
+         * closes the modal
+         * @param  {function} callback
+         * @return {instance} 
+         */
+        close: function ( callback ) {
+            var inst = this;
+            // remove overflow style from body
+            document.body.style.removeProperty('overflow');
+            // hide the modal
+            inst.container.removeClass( inst.settings.activeClass );
+            inst.container.attr( 'aria-hidden', 'true' );
+            // for accessiblity, change tab-index and return focus to trigger
+            inst.source.attr( 'tabindex', '-1' );
+            if( inst.lastOpenedBy.focus ) inst.lastOpenedBy.focus();
+            // run the callbacks
+            if( $.isFunction(callback) ) callback.call(inst);
+            if( $.isFunction(inst.settings.onClose) ) inst.settings.onClose.call(inst);
+            // return instance
+            return inst;
+        },
+        /**
+         * toggles the modal
+         * @param  {function} callback
+         * @return {instance}
+         */
+        toggle: function ( callback ) {
+            return this.isOpen() ? this.close( callback ) : this.open( callback );
+        },
+        /**
+         * determines if the modal is open or not
+         * @return {Boolean}
+         */
+        isOpen: function () {
+            return this.container.hasClass( this.settings.activeClass );        
+        }
     }
 
     var plugin = {
         plugin: Modal,
         defaults: {
+            activeClass: 'is-open',
+            innerClass: 'boost-modal-inner',
+            outerClass: 'boost-modal-outer',
+            effect: null,
+            closeOnClickOff: true,
+            closeOnEsc: true,
+            openOnLoad: false,
+            onInit: null,
+            onOpen: null,
+            onClose: null
         }
     }
 
