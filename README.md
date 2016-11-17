@@ -115,6 +115,7 @@ Effects
 17. swing-right
 18. front-flip
 19. back-flip
+
 ### Usage
 Include the effects stylesheet
 ```html
