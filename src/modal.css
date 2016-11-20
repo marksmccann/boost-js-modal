@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-.boost-modal-outer {
+.modal-mask {
     background-color: rgba(0, 0, 0, 0.5);
     bottom: 0;
     left: 0;
@@ -14,13 +14,13 @@
     right: 0;
     text-align: center;
     top: 0;
-    visibility: hidden; 
+    visibility: hidden;
     transition: all 0.25s;
     perspective: 62rem;
     z-index: 100;
 }
 
-.boost-modal-inner {
+.modal-wrap {
     box-sizing: border-box;
     display: inline-block;
     margin: 1.5rem 0;
@@ -32,7 +32,7 @@
     transform-style: preserve-3d;
 }
 
-.boost-modal-outer:before {
+.modal-mask:before {
     content: '';
     display: inline-block;
     height: 100%;
@@ -40,11 +40,11 @@
     vertical-align: middle;
 }
 
-.boost-modal-outer.is-open {
+.modal-mask.is-open {
     opacity: 1;
     visibility: visible;
 }
 
-.boost-modal-outer.is-open .boost-modal-inner {
+.modal-mask.is-open .modal-wrap {
     opacity: 1;
 }

@@ -13,21 +13,22 @@
         // local instance
         var inst = this;
         // the last trigger used to open the modal
-        inst.lastOpenedBy;
+        inst.lastOpenedBy = null;
         // wrap the source element with the inner container
         inst.source.wrap( $(document.createElement('div'))
-            .addClass( inst.settings.innerClass )
+            .addClass( inst.settings.wrapClass )
             .attr('role','document')[0]
         );
         // wrap the inner container with the outer container
-        inst.source.parent().wrap( $(document.createElement('div')) 
-            .addClass( inst.settings.outerClass )
-            .attr('role','dialog') 
+        inst.source.parent().wrap( $(document.createElement('div'))
+            .addClass( inst.settings.maskClass )
+            .attr('role','dialog')
             .attr('aria-hidden','true')[0]
         );
         // save the outermost container to instance
         inst.container = inst.source.parent().parent();
-        // add aria-labelledby="[headingID]" to each panel
+        // if there is a heading element
+        // add aria-labelledby="[headingID]" to source element
         // if heading does not have an id, create a new one and add it
         if( inst.roles.hasOwnProperty('heading') ) {
             var id = inst.roles.heading.attr('id');
@@ -97,7 +98,7 @@
     Modal.prototype = {
         /**
          * opens the modal
-         * @param  {function} callback 
+         * @param  {function} callback
          * @return {instance}
          */
         open: function ( callback ) {
@@ -119,7 +120,7 @@
         /**
          * closes the modal
          * @param  {function} callback
-         * @return {instance} 
+         * @return {instance}
          */
         close: function ( callback ) {
             var inst = this;
@@ -130,7 +131,10 @@
             inst.container.attr( 'aria-hidden', 'true' );
             // for accessiblity, change tab-index and return focus to trigger
             inst.source.attr( 'tabindex', '-1' );
-            if( inst.lastOpenedBy.focus ) inst.lastOpenedBy.focus();
+            if( inst.lastOpenedBy !== null ) {
+                inst.lastOpenedBy.focus();
+                inst.lastOpenedBy = null;
+            }
             // run the callbacks
             if( $.isFunction(callback) ) callback.call(inst);
             if( $.isFunction(inst.settings.onClose) ) inst.settings.onClose.call(inst);
@@ -150,7 +154,7 @@
          * @return {Boolean}
          */
         isOpen: function () {
-            return this.container.hasClass( this.settings.activeClass );        
+            return this.container.hasClass( this.settings.activeClass );
         }
     }
 
@@ -158,8 +162,8 @@
         plugin: Modal,
         defaults: {
             activeClass: 'is-open',
-            innerClass: 'boost-modal-inner',
-            outerClass: 'boost-modal-outer',
+            wrapClass: 'modal-wrap',
+            maskClass: 'modal-mask',
             effect: null,
             closeOnClickOff: true,
             closeOnEsc: true,

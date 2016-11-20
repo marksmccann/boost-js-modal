@@ -58,8 +58,8 @@ Options
 Name | Default | Description
 --- | --- | ---
 activeClass* | `"is-open"` | the class added to the outer container when active
-innerClass* | `"boost-modal-inner"` | the class added to the inner container of the modal
-outerClass* | `"boost-modal-outer"` | the class added to the outer-most container of the modal 
+innerClass* | `"modal-wrap"` | the class added to the inner container of the modal
+outerClass* | `"modal-mask"` | the class added to the mask/outer-most container of the modal
 effect | `null` | an optional animation for modal, see below for details
 closeOnClickOff | `true` | close the modal if user clicks anywhere off of it
 closeOnEsc | `true` | close the modal when user presses the esc key
@@ -149,7 +149,7 @@ Determines if modal is open or not, returns a boolean.
 instance.isOpen();
 ```
 ### lastOpenedBy
-The element last triggered to open this modal.
+The element last triggered to open this modal. After the modal is closed, this value returns to `null`.
 ```javascript
 instance.lastOpenedBy;
 ```
