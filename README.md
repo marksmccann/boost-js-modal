@@ -1,4 +1,4 @@
-Boost JS Modal
+Boost JS Modal [![Build Status](https://travis-ci.org/marksmccann/boost-js-modal.svg?branch=master)](https://travis-ci.org/marksmccann/boost-js-modal)
 ==================================================
 A style-free and accessible modal plugin for jQuery and [Boost JS](https://github.com/marksmccann/boost-js). This plugin only includes styles absolutely necessary for the modal to work properly, the rest is up to you.
 
