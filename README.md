@@ -58,8 +58,8 @@ Options
 Name | Default | Description
 --- | --- | ---
 activeClass* | `"is-open"` | the class added to the outer container when active
-innerClass* | `"modal-wrap"` | the class added to the inner container of the modal
-outerClass* | `"modal-mask"` | the class added to the mask/outer-most container of the modal
+wrapClass* | `"modal-wrap"` | the class added to the inner container of the modal
+maskClass* | `"modal-mask"` | the class added to the mask/outer-most container of the modal
 effect | `null` | an optional animation for modal, see below for details
 closeOnClickOff | `true` | close the modal if user clicks anywhere off of it
 closeOnEsc | `true` | close the modal when user presses the esc key
