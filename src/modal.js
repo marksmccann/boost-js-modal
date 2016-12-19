@@ -3,7 +3,7 @@
  * A style-free modal plugin for jQuery and Boost JS
  * @author Mark McCann (www.markmccann.me)
  * @license MIT
- * @version 0.0.1
+ * @version 0.1.0
  * @requires jQuery, boost-js
  */
 
@@ -70,18 +70,25 @@
             });
         }
         // close modal if users clicks anywhere off of it
-        if( inst.settings.closeOnClickOff ) {
-            inst.container.on( 'click', function(e){
+        inst.container.on( 'click', function(e){
+            if( inst.settings.closeOnClickOff ) {
                 if( e.target == this ) inst.close();
-            });
-        }
+            }
+        });
         // close modal with 'esc' key
-        if( inst.settings.closeOnEsc ) {
-            $('body').on( 'keyup', function(e){
+        $('body').on( 'keyup', function(e){
+            if( inst.settings.closeOnEsc ) {
                 if(!e.keyCode || e.keyCode === 27) inst.close();
+            }
+        });
+        // throw focus back to source on blur of end element
+        if( inst.roles.hasOwnProperty('end') ) {
+            inst.roles.end.on('blur',function(){
+                inst.source[0].focus();
             });
         }
-        // keep user locked in modal until closed
+        // throw focus back to source if the user
+        // focuses on any element not in the modal
         $('body').on( 'keyup', function(e){
             if( inst.isOpen() && !inst.container[0].contains(document.activeElement) ) {
                 e.stopPropagation(); inst.source[0].focus();

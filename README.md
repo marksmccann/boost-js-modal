@@ -11,14 +11,14 @@ npm install boost-js-modal
 ```
 Install in browser:
 ```html
-<script src="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.0.1/dist/modal.min.js"></script>
+<script src="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.0/dist/modal.min.js"></script>
 ```
 ___________
 
 AND include styles:
 
 ```html
-<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.0.1/dist/modal.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.0/dist/modal.min.css">
 ```
 
 Usage
@@ -89,6 +89,7 @@ open | `a`, `button` | defines a trigger that opens the modal
 close | `a`, `button` | defines a trigger that closes the modal
 toggle | `a`, `button` | defines a trigger that toggles the modal open and closed
 heading | `h2` | used to define the modal with a `aria-labelledby` on container
+end | `a`, `button` | defines the lest focusable element in modal for blur event
 ### Usage
 ```html
 <button data-bind="[instance-id]" data-role="[role-name]">...</button>
@@ -119,7 +120,7 @@ Effects
 ### Usage
 Include the effects stylesheet
 ```html
-<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.0.1/dist/effects.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.0/dist/effects.min.css">
 ```
 Then update the setting
 ```html

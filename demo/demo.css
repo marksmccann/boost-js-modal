@@ -5,6 +5,10 @@
     box-shadow: 0px 2px 8px 0px #333;
 }
 
+.modal-mask {
+    background-color: rgba(0,0,0,.5);
+}
+
 h2 {
     margin: 0;
 }

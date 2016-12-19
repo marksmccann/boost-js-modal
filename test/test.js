@@ -17,7 +17,10 @@ var template = {
     effect: '<div id="modal" data-effect="slide-up"></div>',
     closeOnClickOff: '<div id="modal" data-close-on-click-off="false"></div>',
     closeOnEsc: '<div id="modal" data-close-on-esc="false"></div>',
-    openOnLoad: '<div id="modal" data-open-on-load="true"></div>'
+    openOnLoad: '<div id="modal" data-open-on-load="true"></div>',
+    endElement: '<div id="modal" style="display:none;">'+
+        '<button data-bind="#modal" data-role="close|end">Close</button>'+
+    '</div>'
 }
 
 describe('Boost JS Modal', function () {
