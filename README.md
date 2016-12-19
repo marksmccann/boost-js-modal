@@ -89,7 +89,7 @@ open | `a`, `button` | defines a trigger that opens the modal
 close | `a`, `button` | defines a trigger that closes the modal
 toggle | `a`, `button` | defines a trigger that toggles the modal open and closed
 heading | `h2` | used to define the modal with a `aria-labelledby` on container
-end | `a`, `button` | defines the lest focusable element in modal for blur event
+end | `a`, `button` | defines the last focusable element in modal for blur event
 ### Usage
 ```html
 <button data-bind="[instance-id]" data-role="[role-name]">...</button>
