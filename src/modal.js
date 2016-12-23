@@ -3,7 +3,7 @@
  * A style-free modal plugin for jQuery and Boost JS
  * @author Mark McCann (www.markmccann.me)
  * @license MIT
- * @version 0.1.0
+ * @version 0.1.1
  * @requires jQuery, boost-js
  */
 

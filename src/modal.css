@@ -16,7 +16,7 @@
     visibility: hidden;
     transition: all 0.25s;
     perspective: 62rem;
-    z-index: 100;
+    z-index: -1;
 }
 
 .modal-wrap {
@@ -42,6 +42,7 @@
 .modal-mask.is-open {
     opacity: 1;
     visibility: visible;
+    z-index: 100;
 }
 
 .modal-mask.is-open .modal-wrap {

@@ -11,14 +11,14 @@ npm install boost-js-modal
 ```
 Install in browser:
 ```html
-<script src="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.0/dist/modal.min.js"></script>
+<script src="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.1/dist/modal.min.js"></script>
 ```
 ___________
 
 AND include styles:
 
 ```html
-<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.0/dist/modal.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.1/dist/modal.min.css">
 ```
 
 Usage
@@ -120,7 +120,7 @@ Effects
 ### Usage
 Include the effects stylesheet
 ```html
-<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.0/dist/effects.min.css">
+<link rel="stylesheet" href="https://cdn.rawgit.com/marksmccann/boost-js-modal/v0.1.1/dist/effects.min.css">
 ```
 Then update the setting
 ```html

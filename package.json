@@ -1,7 +1,7 @@
 {
   "name": "boost-js-modal",
   "title": "Boost JS Modal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A style-free modal plugin for jQuery and Boost JS",
   "main": "src/modal.js",
   "scripts": {
